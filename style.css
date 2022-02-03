@@ -1,0 +1,33 @@
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+nav {
+  margin-bottom: 1rem;
+}
+
+.station-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.station,
+.line,
+.section,
+.print {
+  display: none;
+}
+
+.station.show,
+.line.show,
+.section.show,
+.print.show {
+  display: block;
+}
+
+.line-input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
