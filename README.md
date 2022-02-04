@@ -6,10 +6,11 @@
 ## 🚀 기능 요구사항
 
 ### 지하철 역 관련 기능
-- [ ] 지하철 역을 등록하고 삭제할 수 있다. (단, 노선에 등록된 역은 삭제할 수 없다)
-- [ ] 중복된 지하철 역 이름이 등록될 수 없다.
-- [ ] 지하철 역은 2글자 이상이어야 한다.
-- [ ] 지하철 역의 목록을 조회할 수 있다.
+- [x] 지하철 역을 등록하고 삭제할 수 있다.
+   - [ ] (단, 노선에 등록된 역은 삭제할 수 없다)
+- [x] 중복된 지하철 역 이름이 등록될 수 없다.
+- [x] 지하철 역은 2글자 이상이어야 한다.
+- [x] 지하철 역의 목록을 조회할 수 있다.
 
 ### 지하철 노선 관련 기능
 - [ ] 지하철 노선을 등록하고 삭제할 수 있다.
@@ -38,15 +39,15 @@
 ## ✅ 프로그래밍 요구사항
 
 ### 메뉴 버튼
-- [ ] 역 관리 button 태그는 `#station-manager-button` id값을 가진다.
-- [ ] 노선 관리 button 태그는 `#line-manager-button` id값을 가진다.
-- [ ] 구간 관리 button 태그는 `#section-manager-button` id값을 가진다.
-- [ ] 지하철 노선도 출력 관리 button 태그는 `#map-print-manager-button` id값을 가진다.
+- [x] 역 관리 button 태그는 `#station-manager-button` id값을 가진다.
+- [x] 노선 관리 button 태그는 `#line-manager-button` id값을 가진다.
+- [x] 구간 관리 button 태그는 `#section-manager-button` id값을 가진다.
+- [x] 지하철 노선도 출력 관리 button 태그는 `#map-print-manager-button` id값을 가진다.
 
 ### 지하철 역 관련 기능
-- [ ] 지하철 역을 입력하는 input 태그는 `#station-name-input` id값을 가진다.
-- [ ] 지하철 역을 추가하는 button 태그는 `#station-add-button` id값을 가진다.
-- [ ] 지하철 역을 삭제하는 button 태그는 `.station-delete-button` class값을 가진다.
+- [x] 지하철 역을 입력하는 input 태그는 `#station-name-input` id값을 가진다.
+- [x] 지하철 역을 추가하는 button 태그는 `#station-add-button` id값을 가진다.
+- [x] 지하철 역을 삭제하는 button 태그는 `.station-delete-button` class값을 가진다.
 
 ### 지하철 노선 관련 기능
 - [ ] 지하철 노선의 이름을 입력하는 input 태그는 `#line-name-input` id값을 가진다.
