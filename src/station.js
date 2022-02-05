@@ -1,4 +1,4 @@
-const AddBtn = document.querySelector('#station-add-button');
+const addBtn = document.querySelector('#station-add-button');
 const stationInput = document.querySelector('#station-name-input');
 const stationTableBody = document.querySelector('#station-table-tbody');
 let stationName = '';
@@ -46,7 +46,7 @@ stationInput.addEventListener('keyup', (e) => {
   stationName = e.target.value;
 });
 
-AddBtn.addEventListener('click', () => {
+addBtn.addEventListener('click', () => {
   const arr = JSON.parse(localStorage.getItem('stations'));
   if (isValidStationName(stationName)) {
     const newStation = createStation(stationName);
