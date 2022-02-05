@@ -1,4 +1,5 @@
 import { initStation } from './station.js';
+import { initLine } from './line.js';
 
 const stationBtn = document.querySelector('#station-manager-button');
 const lineBtn = document.querySelector('#line-manager-button');
@@ -12,6 +13,7 @@ let currentPage;
 
 window.addEventListener('load', () => {
   initStation();
+  initLine();
 });
 
 function reset() {
