@@ -1,3 +1,5 @@
+import { initStation } from './station.js';
+
 const stationBtn = document.querySelector('#station-manager-button');
 const lineBtn = document.querySelector('#line-manager-button');
 const sectionBtn = document.querySelector('#section-manager-button');
@@ -6,8 +8,11 @@ const station = document.querySelector('.station');
 const line = document.querySelector('.line');
 const section = document.querySelector('.section');
 const mapPrint = document.querySelector('.print');
-
 let currentPage;
+
+window.addEventListener('load', () => {
+  initStation();
+});
 
 function reset() {
   if (currentPage === 'station') {

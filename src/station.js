@@ -3,7 +3,7 @@ const stationInput = document.querySelector('#station-name-input');
 const stationTableBody = document.querySelector('#station-table-tbody');
 let stationName = '';
 
-window.onload = () => {
+export function initStation() {
   if (localStorage.getItem('stations')) {
     const arr = JSON.parse(localStorage.getItem('stations'));
     for (let stationName of arr) {
@@ -13,7 +13,7 @@ window.onload = () => {
   } else {
     localStorage.setItem('stations', '[]');
   }
-};
+}
 
 function createStation(stationName) {
   const tr = document.createElement('tr');
