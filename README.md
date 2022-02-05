@@ -1,6 +1,6 @@
 # 🚇 지하철 노선도 미션
 우아한테크코스의 [지하철 노선도 미션](https://github.com/woowacourse/javascript-subway-map-precourse)을 구현했습니다.<br />
-결과물은 여기서 확인할 수 있습니다. 👉 [보러 가기](https://github.com/kaehehehe/javascript-subway/)
+결과물은 여기서 확인할 수 있습니다. 👉 [보러 가기](https://kaehehehe.github.io/javascript-subway-map/)
 
 <br />
 
