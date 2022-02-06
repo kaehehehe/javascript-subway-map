@@ -122,6 +122,19 @@ addBtn.addEventListener('click', () => {
       end: descendingTerminus,
     });
     localStorage.setItem('lines', JSON.stringify(arr));
+    if (localStorage.getItem('sections')) {
+      const arr = JSON.parse(localStorage.getItem('sections'));
+      arr.push({
+        name: lineName,
+        list: [ascendingTerminus, descendingTerminus],
+      });
+      localStorage.setItem('sections', JSON.stringify(arr));
+    } else {
+      const arr = [
+        { name: lineName, list: [ascendingTerminus, descendingTerminus] },
+      ];
+      localStorage.setItem('sections', JSON.stringify(arr));
+    }
     lineInput.value = '';
     lineInput.focus();
   }

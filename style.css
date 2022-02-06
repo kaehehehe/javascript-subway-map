@@ -35,3 +35,19 @@ nav {
 .line-buttons > button {
   margin-right: 5px;
 }
+
+.section-register {
+  display: none;
+}
+
+.section-register.show {
+  display: block;
+}
+
+.section-register > table {
+  margin-top: 30px;
+}
+
+.order {
+  text-align: center;
+}
