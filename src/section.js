@@ -4,6 +4,8 @@ const lineBtns = document.querySelector('.line-buttons');
 const select = document.querySelector('#section-station-selector');
 const sectionTableBody = document.querySelector('#section-table-tbody');
 
+let currentLine;
+
 export function initSection() {
   if (localStorage.getItem('sections')) {
     const arr = JSON.parse(localStorage.getItem('sections'));
@@ -50,10 +52,27 @@ function setOptions() {
   });
 }
 
+function isLengthThreeOrMore(currentLine) {
+  const arr = JSON.parse(localStorage.getItem('sections'));
+  let stations;
+  for (let obj of arr) {
+    if (obj.name === currentLine) {
+      stations = obj.list;
+    }
+  }
+  if (stations.length >= 3) {
+    return true;
+  } else {
+    alert('노선에 포함된 역이 두개 이하일 때는 역을 제거할 수 없습니다.');
+    return false;
+  }
+}
+
 lineBtns.addEventListener('click', (e) => {
   reset();
   setOptions();
   const id = e.target.dataset.id;
+  currentLine = id;
   const arr = JSON.parse(localStorage.getItem('sections'));
   for (let obj of arr) {
     if (obj.name === id) {
@@ -65,4 +84,10 @@ lineBtns.addEventListener('click', (e) => {
   }
   title.textContent = `${id} 관리`;
   sectionRegister.classList.add('show');
+});
+
+sectionTableBody.addEventListener('click', (e) => {
+  const id = e.target.dataset.id;
+  if (isLengthThreeOrMore(currentLine)) {
+  }
 });
