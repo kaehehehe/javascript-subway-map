@@ -2,6 +2,7 @@ import { initStation } from './station.js';
 import { initLine } from './line.js';
 import { initSection } from './section.js';
 import { updateLineBtns } from './section.js';
+import { updateLine } from './line.js';
 
 const stationBtn = document.querySelector('#station-manager-button');
 const lineBtn = document.querySelector('#line-manager-button');
@@ -40,6 +41,7 @@ stationBtn.addEventListener('click', () => {
 });
 
 lineBtn.addEventListener('click', () => {
+  updateLine();
   if (line.classList[1] !== 'show') {
     reset();
     line.classList.add('show');

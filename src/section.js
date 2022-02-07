@@ -142,6 +142,26 @@ addBtn.addEventListener('click', () => {
   localStorage.setItem('sections', JSON.stringify(arr));
 });
 
+function updateTerminus(start, end) {
+  const arr = JSON.parse(localStorage.getItem('lines'));
+  for (let obj of arr) {
+    if (obj.name === currentLine) {
+      obj.start = start;
+      obj.end = end;
+      localStorage.setItem('lines', JSON.stringify(arr));
+    }
+  }
+}
+
+function isDeletedTerminus(index, updateList) {
+  const len = updateList.length;
+  if (index === 0 || index === len - 1) {
+    const start = currentLineList[0];
+    const end = currentLineList[len - 1];
+    updateTerminus(start, end);
+  }
+}
+
 sectionTableBody.addEventListener('click', (e) => {
   const target = e.target.dataset.id;
   if (!isLengthThreeOrMore()) return;
@@ -153,6 +173,7 @@ sectionTableBody.addEventListener('click', (e) => {
       const index = updateList.indexOf(target);
       updateList.splice(index, 1);
       currentLineList = updateList;
+      isDeletedTerminus(index, updateList);
     }
   }
   updateTable();
