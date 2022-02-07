@@ -143,7 +143,18 @@ addBtn.addEventListener('click', () => {
 });
 
 sectionTableBody.addEventListener('click', (e) => {
-  const id = e.target.dataset.id;
-  if (isLengthThreeOrMore()) {
+  const target = e.target.dataset.id;
+  if (!isLengthThreeOrMore()) return;
+
+  const arr = JSON.parse(localStorage.getItem('sections'));
+  for (let obj of arr) {
+    if (obj.name === currentLine) {
+      const updateList = obj.list;
+      const index = updateList.indexOf(target);
+      updateList.splice(index, 1);
+      currentLineList = updateList;
+    }
   }
+  updateTable();
+  localStorage.setItem('sections', JSON.stringify(arr));
 });
