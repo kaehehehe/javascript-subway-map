@@ -9,10 +9,10 @@ const stationBtn = document.querySelector('#station-manager-button');
 const lineBtn = document.querySelector('#line-manager-button');
 const sectionBtn = document.querySelector('#section-manager-button');
 const printBtn = document.querySelector('#map-print-manager-button');
-const station = document.querySelector('.station');
-const line = document.querySelector('.line');
-const section = document.querySelector('.section');
-const mapPrint = document.querySelector('.print');
+const stationPage = document.querySelector('.station');
+const linePage = document.querySelector('.line');
+const sectionPage = document.querySelector('.section');
+const printPage = document.querySelector('.print');
 let currentPage;
 
 window.addEventListener('load', () => {
@@ -23,47 +23,47 @@ window.addEventListener('load', () => {
 
 function reset() {
   if (currentPage === 'station') {
-    station.classList.remove('show');
+    stationPage.classList.remove('show');
   } else if (currentPage === 'line') {
-    line.classList.remove('show');
+    linePage.classList.remove('show');
   } else if (currentPage === 'section') {
-    section.classList.remove('show');
+    sectionPage.classList.remove('show');
   } else {
-    mapPrint.classList.remove('show');
+    printPage.classList.remove('show');
   }
 }
 
 stationBtn.addEventListener('click', () => {
-  if (station.classList[1] !== 'show') {
+  if (stationPage.classList[1] !== 'show') {
     reset();
-    station.classList.add('show');
+    stationPage.classList.add('show');
     currentPage = 'station';
   }
 });
 
 lineBtn.addEventListener('click', () => {
   updateLine();
-  if (line.classList[1] !== 'show') {
+  if (linePage.classList[1] !== 'show') {
     reset();
-    line.classList.add('show');
+    linePage.classList.add('show');
     currentPage = 'line';
   }
 });
 
 sectionBtn.addEventListener('click', () => {
   updateLineBtns();
-  if (section.classList[1] !== 'show') {
+  if (sectionPage.classList[1] !== 'show') {
     reset();
-    section.classList.add('show');
+    sectionPage.classList.add('show');
     currentPage = 'section';
   }
 });
 
 printBtn.addEventListener('click', () => {
   showRouteMap();
-  if (mapPrint.classList[1] !== 'show') {
+  if (printPage.classList[1] !== 'show') {
     reset();
-    mapPrint.classList.add('show');
-    currentPage = 'mapPrint';
+    printPage.classList.add('show');
+    currentPage = 'print';
   }
 });
