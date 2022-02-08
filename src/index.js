@@ -3,6 +3,7 @@ import { initLine } from './line.js';
 import { initSection } from './section.js';
 import { updateLineBtns } from './section.js';
 import { updateLine } from './line.js';
+import { showRouteMap } from './print.js';
 
 const stationBtn = document.querySelector('#station-manager-button');
 const lineBtn = document.querySelector('#line-manager-button');
@@ -59,6 +60,7 @@ sectionBtn.addEventListener('click', () => {
 });
 
 printBtn.addEventListener('click', () => {
+  showRouteMap();
   if (mapPrint.classList[1] !== 'show') {
     reset();
     mapPrint.classList.add('show');

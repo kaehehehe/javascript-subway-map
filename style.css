@@ -51,3 +51,8 @@ nav {
 .order {
   text-align: center;
 }
+
+.map > ul {
+  list-style: disc;
+  padding-left: 40px;
+}
