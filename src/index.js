@@ -1,9 +1,7 @@
-import { initStation } from './station.js';
-import { initLine } from './line.js';
-import { initSection } from './section.js';
-import { updateLineBtns } from './section.js';
-import { updateLine } from './line.js';
-import { showRouteMap } from './print.js';
+import * as station from './station.js';
+import * as line from './line.js';
+import * as section from './section.js';
+import * as print from './print.js';
 
 const stationBtn = document.querySelector('#station-manager-button');
 const lineBtn = document.querySelector('#line-manager-button');
@@ -16,9 +14,9 @@ const printPage = document.querySelector('.print');
 let currentPage;
 
 window.addEventListener('load', () => {
-  initStation();
-  initLine();
-  initSection();
+  station.initStation();
+  line.initLine();
+  section.initSection();
 });
 
 function reset() {
@@ -42,7 +40,7 @@ stationBtn.addEventListener('click', () => {
 });
 
 lineBtn.addEventListener('click', () => {
-  updateLine();
+  line.updateLine();
   if (linePage.classList[1] !== 'show') {
     reset();
     linePage.classList.add('show');
@@ -51,7 +49,7 @@ lineBtn.addEventListener('click', () => {
 });
 
 sectionBtn.addEventListener('click', () => {
-  updateLineBtns();
+  section.updateLineBtns();
   if (sectionPage.classList[1] !== 'show') {
     reset();
     sectionPage.classList.add('show');
@@ -60,7 +58,7 @@ sectionBtn.addEventListener('click', () => {
 });
 
 printBtn.addEventListener('click', () => {
-  showRouteMap();
+  print.showRouteMap();
   if (printPage.classList[1] !== 'show') {
     reset();
     printPage.classList.add('show');
