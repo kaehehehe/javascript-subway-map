@@ -1,5 +1,3 @@
-import * as line from './line.js';
-
 const addBtn = document.querySelector('#station-add-button');
 const stationInput = document.querySelector('#station-name-input');
 const stationTableBody = document.querySelector('#station-table-tbody');
@@ -68,7 +66,6 @@ addBtn.addEventListener('click', () => {
     stationTableBody.append(newStation);
     arr.push(stationName);
     localStorage.setItem('stations', JSON.stringify(arr));
-    line.updateLine();
   }
   stationInput.value = '';
   stationInput.focus();
@@ -84,7 +81,6 @@ stationTableBody.addEventListener('click', (e) => {
       const index = arr.indexOf(id);
       arr.splice(index, 1);
       localStorage.setItem('stations', JSON.stringify(arr));
-      line.updateLine();
     }
   }
 });
