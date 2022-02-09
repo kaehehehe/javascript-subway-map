@@ -6,6 +6,12 @@ function resetRouteMap() {
   }
 }
 
+function noRouteMap() {
+  const span = document.createElement('span');
+  span.textContent = '등록되어 있는 노선이 없습니다.';
+  map.append(span);
+}
+
 function createRouteMap() {
   const arr = JSON.parse(localStorage.getItem('sections'));
   for (let obj of arr) {
@@ -23,5 +29,9 @@ function createRouteMap() {
 
 export function showRouteMap() {
   resetRouteMap();
+  if (!localStorage.getItem('sections')) {
+    noRouteMap();
+    return;
+  }
   createRouteMap();
 }
