@@ -42,6 +42,8 @@ function resetTable() {
 export function updateLineBtns() {
   resetLineBtns();
   initSection();
+  resetOptions();
+  setOptions();
 }
 
 function updateTable() {
