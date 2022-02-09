@@ -6,8 +6,7 @@ function resetRouteMap() {
   }
 }
 
-export function showRouteMap() {
-  resetRouteMap();
+function createRouteMap() {
   const arr = JSON.parse(localStorage.getItem('sections'));
   for (let obj of arr) {
     const ul = document.createElement('ul');
@@ -20,4 +19,9 @@ export function showRouteMap() {
     });
     map.append(ul);
   }
+}
+
+export function showRouteMap() {
+  resetRouteMap();
+  createRouteMap();
 }
