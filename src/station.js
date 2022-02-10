@@ -3,18 +3,6 @@ const stationInput = document.querySelector('#station-name-input');
 const stationTableBody = document.querySelector('#station-table-tbody');
 let stationName = '';
 
-export function initStation() {
-  if (localStorage.getItem('stations')) {
-    const arr = JSON.parse(localStorage.getItem('stations'));
-    for (let stationName of arr) {
-      const station = createStation(stationName);
-      stationTableBody.append(station);
-    }
-  } else {
-    localStorage.setItem('stations', '[]');
-  }
-}
-
 function createStation(stationName) {
   const tr = document.createElement('tr');
   tr.setAttribute('data-id', stationName);
@@ -28,6 +16,18 @@ function createStation(stationName) {
     `;
   tr.insertAdjacentHTML('afterbegin', elements);
   return tr;
+}
+
+export function initStation() {
+  if (localStorage.getItem('stations')) {
+    const arr = JSON.parse(localStorage.getItem('stations'));
+    for (let stationName of arr) {
+      const station = createStation(stationName);
+      stationTableBody.append(station);
+    }
+  } else {
+    localStorage.setItem('stations', '[]');
+  }
 }
 
 function isValidStationName(stationName) {
