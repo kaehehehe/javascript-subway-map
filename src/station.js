@@ -48,11 +48,11 @@ function isUsedInLine(target) {
     for (let obj of arr) {
       if (obj.start === target || obj.end === target) {
         alert('노선에 등록된 역은 삭제할 수 없습니다.');
-        return false;
+        return true;
       }
     }
   }
-  return true;
+  return false;
 }
 
 stationInput.addEventListener('keyup', (e) => {
@@ -75,7 +75,7 @@ stationTableBody.addEventListener('click', (e) => {
   const id = e.target.dataset.id;
   if (confirm('정말로 삭제하시겠습니까?')) {
     const toBeDeleted = document.querySelector(`tr[data-id=${id}]`);
-    if (isUsedInLine(toBeDeleted.dataset.id)) {
+    if (!isUsedInLine(toBeDeleted.dataset.id)) {
       toBeDeleted.remove();
       const arr = JSON.parse(localStorage.getItem('stations'));
       const index = arr.indexOf(id);
