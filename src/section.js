@@ -134,7 +134,7 @@ function showTheLine(toBeClicked) {
       });
     }
   }
-  title.textContent = `${id} 관리`;
+  title.textContent = `${toBeClicked} 관리`;
   sectionRegister.classList.add('show');
 }
 
