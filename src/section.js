@@ -139,10 +139,12 @@ function showTheLine(toBeClicked) {
 }
 
 lineBtns.addEventListener('click', (e) => {
-  updateSection();
   const toBeClicked = e.target.dataset.id;
-  currentLine = toBeClicked;
-  showTheLine(toBeClicked);
+  if(toBeClicked) {
+    updateSection();
+    currentLine = toBeClicked;
+    showTheLine(toBeClicked);
+  }
 });
 
 select.addEventListener('change', (e) => {
