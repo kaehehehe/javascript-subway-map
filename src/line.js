@@ -73,6 +73,8 @@ function createLine(lineName, ascendingTerminus, descendingTerminus) {
 function isValidLineName(lineName) {
   if (lineName.length === 0) {
     alert('노선 이름을 입력해주세요.');
+    lineInput.value = '';
+    lineInput.focus();
     return false;
   }
 
