@@ -190,8 +190,10 @@ addBtn.addEventListener('click', () => {
 
 sectionTableBody.addEventListener('click', (e) => {
   const toBeClicked = e.target.dataset.id;
-  if (isLengthThreeOrMore(toBeClicked)) {
-    deleteSection(toBeClicked);
-    updateTable();
+  if (confirm('정말로 삭제하시겠습니까?')) {
+    if (isLengthThreeOrMore(toBeClicked)) {
+      deleteSection(toBeClicked);
+      updateTable();
+    }
   }
 });
