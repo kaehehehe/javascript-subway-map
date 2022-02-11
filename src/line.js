@@ -7,37 +7,6 @@ let lineName = '';
 let ascendingTerminus;
 let descendingTerminus;
 
-export function initLine() {
-  if (localStorage.getItem('stations')) {
-    makeOptions();
-  }
-
-  if (localStorage.getItem('lines')) {
-    const arr = JSON.parse(localStorage.getItem('lines'));
-    for (let obj of arr) {
-      const line = createLine(obj.name, obj.start, obj.end);
-      lineTableBody.append(line);
-    }
-  } else {
-    localStorage.setItem('lines', '[]');
-  }
-}
-
-export function updateLine() {
-  while (startSelect.firstChild) {
-    startSelect.removeChild(startSelect.firstChild);
-  }
-
-  while (endSelect.firstChild) {
-    endSelect.removeChild(endSelect.firstChild);
-  }
-
-  while (lineTableBody.firstChild) {
-    lineTableBody.removeChild(lineTableBody.firstChild);
-  }
-  initLine();
-}
-
 function makeOptions() {
   const arr = JSON.parse(localStorage.getItem('stations'));
   ascendingTerminus = arr[0];
@@ -70,6 +39,37 @@ function createLine(lineName, ascendingTerminus, descendingTerminus) {
   `;
   tr.insertAdjacentHTML('afterbegin', elements);
   return tr;
+}
+
+export function initLine() {
+  if (localStorage.getItem('stations')) {
+    makeOptions();
+  }
+
+  if (localStorage.getItem('lines')) {
+    const arr = JSON.parse(localStorage.getItem('lines'));
+    for (let obj of arr) {
+      const line = createLine(obj.name, obj.start, obj.end);
+      lineTableBody.append(line);
+    }
+  } else {
+    localStorage.setItem('lines', '[]');
+  }
+}
+
+export function updateLine() {
+  while (startSelect.firstChild) {
+    startSelect.removeChild(startSelect.firstChild);
+  }
+
+  while (endSelect.firstChild) {
+    endSelect.removeChild(endSelect.firstChild);
+  }
+
+  while (lineTableBody.firstChild) {
+    lineTableBody.removeChild(lineTableBody.firstChild);
+  }
+  initLine();
 }
 
 function isValidLineName(lineName) {
