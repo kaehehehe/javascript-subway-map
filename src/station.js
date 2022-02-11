@@ -55,17 +55,29 @@ function isUsedInLine(target) {
   return false;
 }
 
+function addStation() {
+  const arr = JSON.parse(localStorage.getItem('stations'));
+  const newStation = createStation(stationName);
+  stationTableBody.append(newStation);
+  arr.push(stationName);
+  localStorage.setItem('stations', JSON.stringify(arr));
+}
+
+function deleteStation(toBeDeleted) {
+  toBeDeleted.remove();
+  const arr = JSON.parse(localStorage.getItem('stations'));
+  const index = arr.indexOf(id);
+  arr.splice(index, 1);
+  localStorage.setItem('stations', JSON.stringify(arr));
+}
+
 stationInput.addEventListener('keyup', (e) => {
   stationName = e.target.value;
 });
 
 addBtn.addEventListener('click', () => {
-  const arr = JSON.parse(localStorage.getItem('stations'));
   if (isValidStationName(stationName)) {
-    const newStation = createStation(stationName);
-    stationTableBody.append(newStation);
-    arr.push(stationName);
-    localStorage.setItem('stations', JSON.stringify(arr));
+    addStation();
   }
   stationInput.value = '';
   stationInput.focus();
@@ -76,11 +88,7 @@ stationTableBody.addEventListener('click', (e) => {
   if (confirm('정말로 삭제하시겠습니까?')) {
     const toBeDeleted = document.querySelector(`tr[data-id=${id}]`);
     if (!isUsedInLine(toBeDeleted.dataset.id)) {
-      toBeDeleted.remove();
-      const arr = JSON.parse(localStorage.getItem('stations'));
-      const index = arr.indexOf(id);
-      arr.splice(index, 1);
-      localStorage.setItem('stations', JSON.stringify(arr));
+      deleteStation(toBeDeleted);
     }
   }
 });
