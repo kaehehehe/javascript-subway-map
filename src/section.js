@@ -138,9 +138,34 @@ function showTheLine(toBeClicked) {
   sectionRegister.classList.add('show');
 }
 
+function addSection() {
+  const arr = JSON.parse(localStorage.getItem('sections'));
+  for (let obj of arr) {
+    if (obj.name === currentLine) {
+      const updateList = obj.list;
+      updateList.splice(selectedOrder, 0, selectedStation);
+      currentLineList = updateList;
+    }
+  }
+}
+
+function deleteSection(toBeClicked) {
+  const arr = JSON.parse(localStorage.getItem('sections'));
+  for (let obj of arr) {
+    if (obj.name === currentLine) {
+      const updateList = obj.list;
+      const index = updateList.indexOf(toBeClicked);
+      updateList.splice(index, 1);
+      currentLineList = updateList;
+      isDeletedTerminus(index, updateList);
+      localStorage.setItem('sections', JSON.stringify(arr));
+    }
+  }
+}
+
 lineBtns.addEventListener('click', (e) => {
   const toBeClicked = e.target.dataset.id;
-  if(toBeClicked) {
+  if (toBeClicked) {
     updateSection();
     currentLine = toBeClicked;
     showTheLine(toBeClicked);
@@ -156,34 +181,17 @@ sectionInput.addEventListener('change', (e) => {
 });
 
 addBtn.addEventListener('click', () => {
-  if (isDuplicateName(selectedStation)) return;
-
-  const arr = JSON.parse(localStorage.getItem('sections'));
-  for (let obj of arr) {
-    if (obj.name === currentLine) {
-      const updateList = obj.list;
-      updateList.splice(selectedOrder, 0, selectedStation);
-      currentLineList = updateList;
-    }
+  if (!isDuplicateName(selectedStation)) {
+    addSection();
+    updateTable();
+    localStorage.setItem('sections', JSON.stringify(arr));
   }
-  updateTable();
-  localStorage.setItem('sections', JSON.stringify(arr));
 });
 
 sectionTableBody.addEventListener('click', (e) => {
-  const target = e.target.dataset.id;
-  if (!isLengthThreeOrMore()) return;
-
-  const arr = JSON.parse(localStorage.getItem('sections'));
-  for (let obj of arr) {
-    if (obj.name === currentLine) {
-      const updateList = obj.list;
-      const index = updateList.indexOf(target);
-      updateList.splice(index, 1);
-      currentLineList = updateList;
-      isDeletedTerminus(index, updateList);
-    }
+  const toBeClicked = e.target.dataset.id;
+  if (isLengthThreeOrMore(toBeClicked)) {
+    deleteSection(toBeClicked);
+    updateTable();
   }
-  updateTable();
-  localStorage.setItem('sections', JSON.stringify(arr));
 });
