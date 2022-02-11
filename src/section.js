@@ -145,6 +145,7 @@ function addSection() {
       const updateList = obj.list;
       updateList.splice(selectedOrder, 0, selectedStation);
       currentLineList = updateList;
+      localStorage.setItem('sections', JSON.stringify(arr));
     }
   }
 }
@@ -184,7 +185,6 @@ addBtn.addEventListener('click', () => {
   if (!isDuplicateName(selectedStation)) {
     addSection();
     updateTable();
-    localStorage.setItem('sections', JSON.stringify(arr));
   }
 });
 
