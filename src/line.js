@@ -7,7 +7,7 @@ let lineName = '';
 let ascendingTerminus;
 let descendingTerminus;
 
-function makeOptions() {
+function createOptions() {
   const arr = JSON.parse(localStorage.getItem('stations'));
   ascendingTerminus = arr[0];
   descendingTerminus = arr[0];
@@ -43,7 +43,7 @@ function createLine(lineName, ascendingTerminus, descendingTerminus) {
 
 export function initLine() {
   if (localStorage.getItem('stations')) {
-    makeOptions();
+    createOptions();
   }
 
   if (localStorage.getItem('lines')) {
