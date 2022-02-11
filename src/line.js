@@ -96,6 +96,42 @@ function isValidTerminus(ascendingTerminus, descendingTerminus) {
   return true;
 }
 
+function addLine() {
+  const arr = JSON.parse(localStorage.getItem('lines'));
+  const newLine = createLine(lineName, ascendingTerminus, descendingTerminus);
+  lineTableBody.append(newLine);
+  arr.push({
+    name: lineName,
+    start: ascendingTerminus,
+    end: descendingTerminus,
+  });
+  localStorage.setItem('lines', JSON.stringify(arr));
+}
+
+function updateSectionData() {
+  if (localStorage.getItem('sections')) {
+    const arr = JSON.parse(localStorage.getItem('sections'));
+    arr.push({
+      name: lineName,
+      list: [ascendingTerminus, descendingTerminus],
+    });
+    localStorage.setItem('sections', JSON.stringify(arr));
+  } else {
+    const arr = [
+      { name: lineName, list: [ascendingTerminus, descendingTerminus] },
+    ];
+    localStorage.setItem('sections', JSON.stringify(arr));
+  }
+}
+
+function deleteLine(toBeDeleted) {
+  toBeDeleted.remove();
+  const arr = JSON.parse(localStorage.getItem('lines'));
+  const index = arr.indexOf(id);
+  arr.splice(index, 1);
+  localStorage.setItem('lines', JSON.stringify(arr));
+}
+
 lineInput.addEventListener('keyup', (e) => {
   lineName = e.target.value;
 });
@@ -109,32 +145,12 @@ endSelect.addEventListener('change', (e) => {
 });
 
 addBtn.addEventListener('click', () => {
-  const arr = JSON.parse(localStorage.getItem('lines'));
   if (
     isValidLineName(lineName) &&
     isValidTerminus(ascendingTerminus, descendingTerminus)
   ) {
-    const newLine = createLine(lineName, ascendingTerminus, descendingTerminus);
-    lineTableBody.append(newLine);
-    arr.push({
-      name: lineName,
-      start: ascendingTerminus,
-      end: descendingTerminus,
-    });
-    localStorage.setItem('lines', JSON.stringify(arr));
-    if (localStorage.getItem('sections')) {
-      const arr = JSON.parse(localStorage.getItem('sections'));
-      arr.push({
-        name: lineName,
-        list: [ascendingTerminus, descendingTerminus],
-      });
-      localStorage.setItem('sections', JSON.stringify(arr));
-    } else {
-      const arr = [
-        { name: lineName, list: [ascendingTerminus, descendingTerminus] },
-      ];
-      localStorage.setItem('sections', JSON.stringify(arr));
-    }
+    addLine();
+    updateSectionData();
     lineInput.value = '';
     lineInput.focus();
   }
@@ -142,12 +158,8 @@ addBtn.addEventListener('click', () => {
 
 lineTableBody.addEventListener('click', (e) => {
   const id = e.target.dataset.id;
+  const toBeDeleted = document.querySelector(`tr[data-id="${id}"]`);
   if (confirm('정말로 삭제하시겠습니까?')) {
-    const toBeDeleted = document.querySelector(`tr[data-id="${id}"]`);
-    toBeDeleted.remove();
-    const arr = JSON.parse(localStorage.getItem('lines'));
-    const index = arr.indexOf(id);
-    arr.splice(index, 1);
-    localStorage.setItem('lines', JSON.stringify(arr));
+    deleteLine(toBeDeleted);
   }
 });
