@@ -27,7 +27,7 @@ function createSection(order, stationName) {
   return tr;
 }
 
-function setOptions() {
+function createOptions() {
   const arr = JSON.parse(localStorage.getItem('stations'));
   selectedStation = arr[0];
   arr.map((item) => {
@@ -70,7 +70,7 @@ export function updateLineBtns() {
   resetLineBtns();
   initSection();
   resetOptions();
-  setOptions();
+  createOptions();
 }
 
 function updateTable() {
@@ -83,7 +83,7 @@ function updateTable() {
 function updateSection() {
   resetTable();
   resetOptions();
-  setOptions();
+  createOptions();
 }
 
 function isDuplicateName() {
