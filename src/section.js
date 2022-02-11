@@ -114,7 +114,7 @@ function updateTerminus(start, end) {
   }
 }
 
-function isDeletedTerminus(index, updateList) {
+function toBeDeletedTerminus(index, updateList) {
   const len = updateList.length;
   if (index === 0 || index === len - 1) {
     const start = currentLineList[0];
@@ -157,7 +157,7 @@ function deleteSection(toBeClicked) {
       const index = updateList.indexOf(toBeClicked);
       updateList.splice(index, 1);
       currentLineList = updateList;
-      isDeletedTerminus(index, updateList);
+      toBeDeletedTerminus(index, updateList);
       localStorage.setItem('sections', JSON.stringify(arr));
     }
   }
