@@ -29,9 +29,9 @@ function createRouteMap() {
 
 export function showRouteMap() {
   resetRouteMap();
-  if (!localStorage.getItem('sections')) {
+  if (localStorage.getItem('sections')) {
+    createRouteMap();
+  } else {
     noRouteMap();
-    return;
   }
-  createRouteMap();
 }
