@@ -11,6 +11,33 @@ let selectedStation;
 let selectedOrder;
 let currentLineList;
 
+function createSection(order, stationName) {
+  const tr = document.createElement('tr');
+  tr.setAttribute('data-id', stationName);
+  const elements = `
+    <td class="order">${order}</td>
+    <td>${stationName}</td>
+    <td>
+      <button class="section-delete-button" data-id=${stationName}>
+        노선에서 제거
+      </button>
+    </td>
+  `;
+  tr.insertAdjacentHTML('afterbegin', elements);
+  return tr;
+}
+
+function setOptions() {
+  const arr = JSON.parse(localStorage.getItem('stations'));
+  selectedStation = arr[0];
+  arr.map((item) => {
+    select.insertAdjacentHTML(
+      'beforeend',
+      `<option value=${item}>${item}</option>`
+    );
+  });
+}
+
 export function initSection() {
   if (localStorage.getItem('sections')) {
     const arr = JSON.parse(localStorage.getItem('sections'));
@@ -59,33 +86,6 @@ function updateSection() {
   setOptions();
 }
 
-function createSection(order, stationName) {
-  const tr = document.createElement('tr');
-  tr.setAttribute('data-id', stationName);
-  const elements = `
-    <td class="order">${order}</td>
-    <td>${stationName}</td>
-    <td>
-      <button class="section-delete-button" data-id=${stationName}>
-        노선에서 제거
-      </button>
-    </td>
-  `;
-  tr.insertAdjacentHTML('afterbegin', elements);
-  return tr;
-}
-
-function setOptions() {
-  const arr = JSON.parse(localStorage.getItem('stations'));
-  selectedStation = arr[0];
-  arr.map((item) => {
-    select.insertAdjacentHTML(
-      'beforeend',
-      `<option value=${item}>${item}</option>`
-    );
-  });
-}
-
 function isDuplicateName() {
   if (currentLineList.includes(selectedStation)) {
     alert('이미 등록되어 있는 역은 등록할 수 없습니다.');
@@ -103,13 +103,30 @@ function isLengthThreeOrMore() {
   }
 }
 
-lineBtns.addEventListener('click', (e) => {
-  updateSection();
-  const id = e.target.dataset.id;
-  currentLine = id;
+function updateTerminus(start, end) {
+  const arr = JSON.parse(localStorage.getItem('lines'));
+  for (let obj of arr) {
+    if (obj.name === currentLine) {
+      obj.start = start;
+      obj.end = end;
+      localStorage.setItem('lines', JSON.stringify(arr));
+    }
+  }
+}
+
+function isDeletedTerminus(index, updateList) {
+  const len = updateList.length;
+  if (index === 0 || index === len - 1) {
+    const start = currentLineList[0];
+    const end = currentLineList[len - 1];
+    updateTerminus(start, end);
+  }
+}
+
+function showTheLine(toBeClicked) {
   const arr = JSON.parse(localStorage.getItem('sections'));
   for (let obj of arr) {
-    if (obj.name === id) {
+    if (obj.name === toBeClicked) {
       currentLineList = obj.list;
       const stations = obj.list;
       stations.map((item, index) => {
@@ -119,6 +136,13 @@ lineBtns.addEventListener('click', (e) => {
   }
   title.textContent = `${id} 관리`;
   sectionRegister.classList.add('show');
+}
+
+lineBtns.addEventListener('click', (e) => {
+  updateSection();
+  const toBeClicked = e.target.dataset.id;
+  currentLine = toBeClicked;
+  showTheLine(toBeClicked);
 });
 
 select.addEventListener('change', (e) => {
@@ -143,26 +167,6 @@ addBtn.addEventListener('click', () => {
   updateTable();
   localStorage.setItem('sections', JSON.stringify(arr));
 });
-
-function updateTerminus(start, end) {
-  const arr = JSON.parse(localStorage.getItem('lines'));
-  for (let obj of arr) {
-    if (obj.name === currentLine) {
-      obj.start = start;
-      obj.end = end;
-      localStorage.setItem('lines', JSON.stringify(arr));
-    }
-  }
-}
-
-function isDeletedTerminus(index, updateList) {
-  const len = updateList.length;
-  if (index === 0 || index === len - 1) {
-    const start = currentLineList[0];
-    const end = currentLineList[len - 1];
-    updateTerminus(start, end);
-  }
-}
 
 sectionTableBody.addEventListener('click', (e) => {
   const target = e.target.dataset.id;
