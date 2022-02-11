@@ -8,7 +8,9 @@ let ascendingTerminus;
 let descendingTerminus;
 
 export function initLine() {
-  if (localStorage.getItem('stations')) makeOptions();
+  if (localStorage.getItem('stations')) {
+    makeOptions();
+  }
 
   if (localStorage.getItem('lines')) {
     const arr = JSON.parse(localStorage.getItem('lines'));
